@@ -31,8 +31,8 @@ class LabelWidget(forms.TextInput):
         Uses the string names rather than the tags themselves in order to work
         with tag lists built from forms not fully submitted.
         """
-        return [(tag.name, 'selected' if tag.name in tags else '')
-                for tag in self.model.objects.all()]
+        return [(tag.name, 'selected' if tag.name in tags else 'n', tag.group.color if tag.group else '#000000')
+                for tag in self.model.objects.all().order_by('group')]
 
     def format_value(self, value):
         if value is not None and not isinstance(value, six.string_types):
@@ -65,9 +65,9 @@ class LabelWidget(forms.TextInput):
             attrs.update({'class': 'tags'})
         list_attrs = flatatt(attrs)
 
-        tag_li = "".join(["<li data-tag-name='{0}' class={1}>{0}</li>".format(
-            tag[0], tag[1]) for tag in selected_tags])
-        tag_ul = "<ul{0}>{1}</ul>".format(list_attrs, tag_li)
+        tag_li = u"".join([u"<li data-tag-name='{0}' class={1} style='border-top: .2rem solid {2}'>{0}</li>".format(
+            tag[0], tag[1], tag[2]) for tag in selected_tags])
+        tag_ul = u"<ul{0}>{1}</ul>".format(list_attrs, tag_li)
         return mark_safe(u"{0}{1}".format(tag_ul, input_field))
 
     class Media:

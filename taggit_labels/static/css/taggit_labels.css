@@ -3,13 +3,14 @@ ul.tags li {
   margin: 0 5px 10px 5px;
   padding: 5px;
   background-color: #fff;
-  border: 1px solid #ff8600;
-  color: #777;
+  border: 1px solid #f2f2f2;
+  color: #808080;
   cursor: pointer;
 }
 ul.tags li.selected {
-  background-color: #ff8600;
-  color: #fff;
+  background-color: #f2f2f2;
+  color: #808080;
+  border: 1px solid #808080;
 }
 ul.tags li:hover {
   background-color: #FF9966;
